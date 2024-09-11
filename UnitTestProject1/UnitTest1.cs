@@ -65,16 +65,16 @@ namespace UnitTestProject1
         public void DigitValueChar()
         {
             Dictionary<char, int> testCases = new Dictionary<char, int>()
-            {
-                {'N', 0},
-                {'I', 1},
-                {'V', 5},
-                {'X', 10},
-                {'L', 50},
-                {'C', 100},
-                {'D', 500},
-                {'M', 1000},
-            };
+             {
+                 {'N', 0},
+                 {'I', 1},
+                 {'V', 5},
+                 {'X', 10},
+                 {'L', 50},
+                 {'C', 100},
+                 {'D', 500},
+                 {'M', 1000},
+             };
             foreach (var testCase in testCases)
             {
                 Assert.AreEqual(testCase.Value,
@@ -122,7 +122,7 @@ namespace UnitTestProject1
                 char invalidChar = testCase.Value;
                 int position = testCase.Key.IndexOf(invalidChar);
 
-                StringAssert.Contains(ex.Message, $"{invalidChar}", // Проверка, что сообщение содержит некорректный символ и его позицию
+                StringAssert.Contains(ex.Message, $"{invalidChar}",
                     $"Message should mention the invalid character '{invalidChar}', but it was: {ex.Message}");
                 StringAssert.Contains(ex.Message, $"position {position}",
                     $"Message should mention the position of '{invalidChar}' at position {position}, but it was: {ex.Message}");
