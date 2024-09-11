@@ -107,9 +107,12 @@ namespace UnitTestProject1
             // HomeW_09.09.2024
             Dictionary<string, char> invalidStrings = new Dictionary<string, char>()
             {
-                { "SDR", 'S' }, 
+                { "SDR", 'S' },
                 { "VXLQ", 'Q' },
-                { "MMMCMZ", 'Z' }
+                { "MMMCMZ", 'Z' },
+                {"XXL", 'L'},
+                {"IIV", 'I'},
+                {"VV", 'V'},
             };
 
             foreach (var testCase in invalidStrings)
@@ -126,6 +129,21 @@ namespace UnitTestProject1
                     $"Message should mention the invalid character '{invalidChar}', but it was: {ex.Message}");
                 StringAssert.Contains(ex.Message, $"position {position}",
                     $"Message should mention the position of '{invalidChar}' at position {position}, but it was: {ex.Message}");
+            }
+
+
+            // HomeW_10.09.2024
+            string[] exCases3 = { "IIV", "XXL", "VV", "LL", "DD" };
+
+            foreach (var testCase in exCases3)
+            {
+                var ex = Assert.ThrowsException<ArgumentException>(
+                    () => RomanNumber.Parse(testCase),
+                    $"Expected ArgumentException for incorrect numeral sequence '{testCase}'"
+                );
+
+                StringAssert.Contains(ex.Message, "invalid sequence",
+                    $"Message should explain the invalid numeral sequence, but it was: {ex.Message}");
             }
         }
     }
