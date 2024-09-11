@@ -104,6 +104,29 @@ namespace UnitTestProject1
                     $"Message should contain the word 'argument', but it was: {ex.Message}");
             }
 
+            // HomeW_09.09.2024
+            Dictionary<string, char> invalidStrings = new Dictionary<string, char>()
+            {
+                { "SDR", 'S' }, 
+                { "VXLQ", 'Q' },
+                { "MMMCMZ", 'Z' }
+            };
+
+            foreach (var testCase in invalidStrings)
+            {
+                var ex = Assert.ThrowsException<ArgumentException>(
+                    () => RomanNumber.Parse(testCase.Key),
+                    $"Expected ArgumentException for value '{testCase.Key}'"
+                );
+
+                char invalidChar = testCase.Value;
+                int position = testCase.Key.IndexOf(invalidChar);
+
+                StringAssert.Contains(ex.Message, $"{invalidChar}", // Проверка, что сообщение содержит некорректный символ и его позицию
+                    $"Message should mention the invalid character '{invalidChar}', but it was: {ex.Message}");
+                StringAssert.Contains(ex.Message, $"position {position}",
+                    $"Message should mention the position of '{invalidChar}' at position {position}, but it was: {ex.Message}");
+            }
         }
     }
 }

@@ -17,20 +17,29 @@ namespace APP
 
         public int Value { get { return _value; } }
 
-        public static RomanNumber Parse(string value)
+        public static RomanNumber Parse(string value) // обновление метода - добавил проверку для неправильных цифр и включил позицию символа в исключение.
         {
             int result = 0;
             int prevDigit = 0;
 
-            foreach (char c in value.Reverse())
+            for (int i = value.Length - 1; i >= 0; i--)
             {
-                int digit = DigitValue(c);
-                result += digit < prevDigit ? -digit : digit;
-                prevDigit = digit;
+                char c = value[i];
+                try
+                {
+                    int digit = DigitValue(c);
+                    result += digit < prevDigit ? -digit : digit;
+                    prevDigit = digit;
+                }
+                catch (ArgumentException ex)
+                {
+                    throw new ArgumentException($"Invalid character '{c}' at position {i}.", ex);
+                }
             }
 
             return new RomanNumber(result);
         }
+
 
         public static int DigitValue(char digit)
         {
@@ -43,9 +52,12 @@ namespace APP
                 case 'L': return 50;
                 case 'C': return 100;
                 case 'D': return 500;
-                default: return 1000;
+                case 'M': return 1000;
+                default:
+                    throw new ArgumentException($"Invalid Roman numeral character: {digit}");
             }
         }
+
 
     }
 }
