@@ -17,7 +17,7 @@ namespace APP
 
         public int Value { get { return _value; } }
 
-        public static RomanNumber Parse(string value) // обновление метода - добавил проверку для неправильных цифр и включил позицию символа в исключение.
+        public static RomanNumber Parse(string value)
         {
             int result = 0;
             int prevDigit = 0;
@@ -27,6 +27,11 @@ namespace APP
                 char c = value[i];
                 try
                 {
+                    if (!IsValidRomanDigit(c)) // использую
+                    {
+                        throw new ArgumentException($"Invalid character '{c}' at position {i}.");
+                    }
+
                     int digit = DigitValue(c);
                     result += digit < prevDigit ? -digit : digit;
                     prevDigit = digit;
@@ -39,7 +44,6 @@ namespace APP
 
             return new RomanNumber(result);
         }
-
 
         public static int DigitValue(char digit)
         {
@@ -58,6 +62,10 @@ namespace APP
             }
         }
 
-
+        public static bool IsValidRomanDigit(char digit) // новый метод с проверкой
+        {
+             return digit == 'N' || digit == 'I' || digit == 'V' || digit == 'X' || digit == 'L' || digit == 'C' || digit == 'D' || digit == 'M';
+        }
     }
+
 }
