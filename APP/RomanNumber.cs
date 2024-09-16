@@ -8,7 +8,7 @@ namespace APP
 {
     public class RomanNumber
     {
-        private readonly int _value;
+      /*  private readonly int _value;
 
         public RomanNumber(int value)
         {
@@ -65,7 +65,7 @@ namespace APP
         public static bool IsValidRomanDigit(char digit) // новый метод с проверкой
         {
              return digit == 'N' || digit == 'I' || digit == 'V' || digit == 'X' || digit == 'L' || digit == 'C' || digit == 'D' || digit == 'M';
-        }
+        }*/
     }
 
 }
