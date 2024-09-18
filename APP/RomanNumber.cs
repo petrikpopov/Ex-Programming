@@ -8,64 +8,46 @@ namespace APP
 {
     public class RomanNumber
     {
-      /*  private readonly int _value;
+        private readonly int _value;
 
-        public RomanNumber(int value)
+        public RomanNumber(string roman)
         {
-            _value = value;
+            _value = RomanNumberParser.Parse(roman);
         }
 
-        public int Value { get { return _value; } }
-
-        public static RomanNumber Parse(string value)
+        public short ToShort()
         {
-            int result = 0;
-            int prevDigit = 0;
-
-            for (int i = value.Length - 1; i >= 0; i--)
-            {
-                char c = value[i];
-                try
-                {
-                    if (!IsValidRomanDigit(c)) // использую
-                    {
-                        throw new ArgumentException($"Invalid character '{c}' at position {i}.");
-                    }
-
-                    int digit = DigitValue(c);
-                    result += digit < prevDigit ? -digit : digit;
-                    prevDigit = digit;
-                }
-                catch (ArgumentException ex)
-                {
-                    throw new ArgumentException($"Invalid character '{c}' at position {i}.", ex);
-                }
-            }
-
-            return new RomanNumber(result);
+            if (_value > short.MaxValue || _value < short.MinValue)
+                throw new OverflowException("Value is out of range for short.");
+            return (short)_value;
         }
 
-        public static int DigitValue(char digit)
+        public byte ToByte()
         {
-            switch (digit)
-            {
-                case 'N': return 0;
-                case 'I': return 1;
-                case 'V': return 5;
-                case 'X': return 10;
-                case 'L': return 50;
-                case 'C': return 100;
-                case 'D': return 500;
-                case 'M': return 1000;
-                default:
-                    throw new ArgumentException($"Invalid Roman numeral character: {digit}");
-            }
+            if (_value > byte.MaxValue || _value < byte.MinValue)
+                throw new OverflowException("Value is out of range for byte.");
+            return (byte)_value;
         }
 
-        public static bool IsValidRomanDigit(char digit) // новый метод с проверкой
+        public long ToLong()
         {
-             return digit == 'N' || digit == 'I' || digit == 'V' || digit == 'X' || digit == 'L' || digit == 'C' || digit == 'D' || digit == 'M';
-        }*/
+            return _value;
+        }
+
+        public int ToInt()
+        {
+            return _value;
+        }
+
+        public float ToFloat()
+        {
+            return _value;
+        }
+
+        public double ToDouble()
+        {
+            return _value;
+        }
     }
 
 }
