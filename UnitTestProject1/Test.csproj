@@ -52,6 +52,8 @@
     <Compile Include="RomanNumberParserTest.cs" />
     <Compile Include="RomanNumberTest.cs" />
     <Compile Include="RomanNumberValidatorTest.cs" />
+    <Compile Include="TestCase.cs" />
+    <Compile Include="UnifiedRomanNumberTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
