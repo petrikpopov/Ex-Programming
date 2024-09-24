@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,22 +13,52 @@ namespace UnitTestProject1
     public class RomanNumberValidatorTest
     {
         [TestMethod]
-        public void IsValidRomanDigitTest()
+        public void TestCheckSymbols()
         {
-            Assert.IsTrue(RomanNumberValidator.IsValidRomanDigit('I'));
-            Assert.IsTrue(RomanNumberValidator.IsValidRomanDigit('V'));
-            Assert.IsTrue(RomanNumberValidator.IsValidRomanDigit('X'));
-            Assert.IsFalse(RomanNumberValidator.IsValidRomanDigit('A'));
-            Assert.IsFalse(RomanNumberValidator.IsValidRomanDigit('1'));
+            var methodInfo = typeof(RomanNumberValidator)
+                .GetMethod("CheckSymbols", BindingFlags.NonPublic | BindingFlags.Static);
+
+            Assert.IsNotNull(methodInfo);
+
+            bool result = (bool)methodInfo.Invoke(null, new object[] { "IV" });
+            Assert.IsTrue(result);
+
+            result = (bool)methodInfo.Invoke(null, new object[] { "ABC" });
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
-        public void IsValidRomanStringTest()
+        public void TestCheckDigitRatios()
         {
-            Assert.IsTrue(RomanNumberValidator.IsValidRomanString("IV"));
-            Assert.IsTrue(RomanNumberValidator.IsValidRomanString("MCMXC"));
-            Assert.IsFalse(RomanNumberValidator.IsValidRomanString("ABC"));
-            Assert.IsFalse(RomanNumberValidator.IsValidRomanString("123"));
+            var methodInfo = typeof(RomanNumberValidator)
+                .GetMethod("CheckDigitRatios", BindingFlags.NonPublic | BindingFlags.Static);
+
+            Assert.IsNotNull(methodInfo);
+
+            bool result = (bool)methodInfo.Invoke(null, new object[] { "MCMXC" });
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestCheckSequence()
+        {
+            var methodInfo = typeof(RomanNumberValidator)
+                .GetMethod("CheckSequence", BindingFlags.NonPublic | BindingFlags.Static);
+
+            Assert.IsNotNull(methodInfo);
+
+            bool result = (bool)methodInfo.Invoke(null, new object[] { "IX" });
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestValidate()
+        {
+            bool isValid = RomanNumberValidator.Validate("IV");
+            Assert.IsTrue(isValid);
+
+            isValid = RomanNumberValidator.Validate("IIII");
+            Assert.IsFalse(isValid);
         }
     }
 }
