@@ -37,6 +37,15 @@ namespace UnitTestProject1
                 new TestCase<string, int>("Test Invalid Numeral IIII", "IIII", 0, () =>
                 {
                     Assert.ThrowsException<ArgumentException>(() => RomanNumberParser.Parse("IIII"));
+                }),
+                // Нові тести exCases4 та exCases5
+                new TestCase<string, int>("Test exCases4", "XL", 40, () =>
+                {
+                    Assert.AreEqual(40, RomanNumberParser.Parse("XL"));
+                }),
+                new TestCase<string, int>("Test exCases5", "CD", 400, () =>
+                {
+                    Assert.AreEqual(400, RomanNumberParser.Parse("CD"));
                 })
             };
         }
